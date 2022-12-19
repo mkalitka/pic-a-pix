@@ -1,6 +1,6 @@
 # pic-a-pix 🖼️
 
-#### *A simple project that creates nonograms from pictures and automatically solves them.*
+#### *A simple Python project that creates nonograms from pictures and automatically solves them.*
 
 The project was created by **UWR** students for **PWI** course.
 
@@ -14,13 +14,10 @@ The project was created by **UWR** students for **PWI** course.
 
 ## Roadmap
 
-Python:
 - Convert an image to 1:1 aspect ratio 🟥
 - Divide an image to pixels sections 😀
-- Pick a color for a section 💁🏿 💁🏻‍♀️
+- Pick a color for a section ⚫⚪
 - Create a nonogram with an algorythm ☯️
-
-C++:
 - Solve a nonogram with an algorythm 🖩
 - Draw and export nonogram 🖼️
 
