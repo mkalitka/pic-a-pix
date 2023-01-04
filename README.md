@@ -27,7 +27,13 @@ The project was created by **UWR** students for **PWI** course.
 
 ## TO-DO
 
-***TO-DO**: Insert a TO-DO list (XD) with tasks attached to students*
+- Generator K4SIA
+- Solving function
+- GUI
+- MakeFile
+- Creator (optional)
+- Graphical representation of board (optional)
+
 
 ## Usage
 
