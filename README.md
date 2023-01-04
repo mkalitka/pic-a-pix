@@ -19,8 +19,6 @@ Python:
 - Divide an image to pixels sections 😀
 - Pick a color for a section 💁🏿 💁🏻‍♀️
 - Create a nonogram with an algorythm ☯️
-
-C++:
 - Solve a nonogram with an algorythm 🖩
 - Draw and export nonogram 🖼️
 
@@ -30,7 +28,13 @@ C++:
 
 ## TO-DO
 
-***TO-DO**: Insert a TO-DO list (XD) with tasks attached to students*
+- Generator K4SIA
+- Solving function
+- GUI
+- MakeFile
+- Creator (optional)
+- Graphical representation of board (optional)
+
 
 ## Usage
 
