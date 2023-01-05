@@ -21,10 +21,6 @@ The project was created by **UWR** students for **PWI** course.
 - Solve a nonogram with an algorythm 🖩
 - Draw and export nonogram 🖼️
 
-## Installation
-
-***TO-DO**: Insert an installation guide here*
-
 ## TO-DO
 
 - Generator K4SIA
@@ -34,10 +30,16 @@ The project was created by **UWR** students for **PWI** course.
 - Creator (optional)
 - Graphical representation of board (optional)
 
+## Installation
+
+***TO-DO**: Insert an installation guide here*
 
 ## Usage
 
-***TO-DO**: Insert an usage guide here*
+To use pic-a-pix, simply run the package as a module:
+```
+python3 -m pic_a_pix/
+```
 
 ## Running Tests
 
