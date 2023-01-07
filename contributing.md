@@ -24,6 +24,13 @@ Before making a commit on local repo, I suggest to look at your changes with:
 
 `git status` and `git diff`
 
+and please, **lint and format** your code:
+
+```
+make lint
+make format
+```
+
 All changes will be seen on Github when creating pull request. Try not to do unnecessary changes.
 
 To commit your changes, you should push your commits to your fork with:

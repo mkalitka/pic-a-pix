@@ -1,0 +1,17 @@
+[project]
+name = "pic_a_pix"
+version = "0.1"
+description = "A simple Python project that creates nonograms from pictures and automatically solves them."
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+dependencies = [
+    "pillow"
+]
+
+[project.scripts]
+pic_a_pix = "pic_a_pix.__main__:main"
+
+[build-system]
+requires = ["setuptools>=43.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
