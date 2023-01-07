@@ -50,7 +50,7 @@ clean:
 	rm -rf .cache/
 	rm -rf *.egg-info
 
-uninstall:
+uninstall: clean
 	@pip3 uninstall pic_a_pix pillow
 
 lint:
