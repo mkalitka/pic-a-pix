@@ -32,13 +32,24 @@ The project was created by **UWR** students for **PWI** course.
 
 ## Installation
 
-***TO-DO**: Insert an installation guide here*
+To install pic-a-pix, type:
+
+```
+make install
+```
 
 ## Usage
 
-To use pic-a-pix, simply run the package as a module:
+To use pic-a-pix, simply run it via cmd:
+
 ```
-python3 -m pic_a_pix/
+pic_a_pix --help
+```
+
+If you have encountered any problems with command above, try:
+
+```
+python3 -m pic_a_pix --help
 ```
 
 ## Running Tests
