@@ -17,7 +17,7 @@ def columns_and_rows(img):
     n_h = img.height
     m_w = img.width
     pixels = [[img.getpixel((i, j)) for i in range(m_w)] for j in range(n_h)]
-    rows, cols = [[]for i in range(m_w)], [[]for i in range(n_h)]
+    rows, cols = [[]for i in range(n_h)], [[]for i in range(m_w)]
     """ ZLICZANIE CIAGOW CZARNYCH PIKSELI PO WIERSZACH """
     for i in range(n_h):
         sum_pix = 0
