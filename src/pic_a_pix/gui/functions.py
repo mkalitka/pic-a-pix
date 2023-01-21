@@ -1,6 +1,7 @@
 from PIL import ImageColor
+from tkinter import filedialog
+from pic_a_pix import k4sia_image
 import pygame
-
 
 # Changing color
 def hex_to_rgb(hex_color):
@@ -22,3 +23,12 @@ def check_solution(correct_arr, to_check_arr):
             if correct_arr[i][j] != to_check_arr[i][j]:
                 return 0
     return 1
+
+#Get file's path
+def file_open():
+    path = filedialog.askopenfile(title = "Select a File")
+    return path
+
+#Test file_open function
+p = file_open()
+(convert_img(p.name, 40, 150)).show()
