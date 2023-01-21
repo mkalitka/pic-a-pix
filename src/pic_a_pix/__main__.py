@@ -1,6 +1,7 @@
 import argparse
 
-from pic_a_pix import version
+from pic_a_pix import version, k4sia_image
+from pic_a_pix.cli import argtypes
 
 
 def create_argument_parser() -> argparse.ArgumentParser:
@@ -30,12 +31,45 @@ def create_argument_parser() -> argparse.ArgumentParser:
         help="verbose mode (prints more logs)",
     )
 
+    parser.add_argument(
+        "-i",
+        "--image",
+        action="store",
+        type=argtypes.img_path,
+        help="path to an image to be converted",
+    )
+
+    parser.add_argument(
+        "-s",
+        "--size",
+        action="store",
+        type=argtypes.size,
+        default=20,
+        help="sets n x n pixels size of an image (5-100)",
+    )
+
+    parser.add_argument(
+        "-t",
+        "--threshold",
+        action="store",
+        type=argtypes.threshold,
+        default=160,
+        help="sets threshold for black pixels from 0 to 255",
+    )
+
     return parser
 
 
 def print_version() -> None:
     """Prints installed pic_a_pix version"""
     print(f"Current pic_a_pix version: {version.__version__}")
+
+
+def convert_image(img_name: str, img_size: int, threshold: int) -> None:
+    """Converts and shows nonogram"""
+    converted = k4sia_image.convert_img(img_name, img_size, threshold)
+    converted.show()
+    print(k4sia_image.columns_and_rows(converted))
 
 
 def main() -> None:
@@ -45,6 +79,12 @@ def main() -> None:
 
     if hasattr(cmdline_arguments, "version"):
         print_version()
+    elif cmdline_arguments.image is not None:
+        convert_image(
+            cmdline_arguments.image,
+            cmdline_arguments.size,
+            cmdline_arguments.threshold,
+        )
     else:
         parser.print_help()
 

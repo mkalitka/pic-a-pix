@@ -51,10 +51,10 @@ clean:
 	rm -rf *.egg-info
 
 uninstall: clean
-	@pip3 uninstall pic_a_pix pillow
+	@pip3 uninstall pic_a_pix pillow pygame
 
 lint:
-	@pylint --disable C0114 pic_a_pix/
+	@pylint --disable C0114 --disable C0103 pic_a_pix/
 
 format:
 	@black .
