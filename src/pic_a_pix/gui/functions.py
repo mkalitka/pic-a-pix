@@ -35,4 +35,4 @@ def file_open():
 
 #Test file_open function
 p = file_open()
-(k4sia_image.convert_img(p.name, 40, 90)).show()
+(k4sia_image.convert_img(p.name, 1, 90)).show()
