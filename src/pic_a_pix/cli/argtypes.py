@@ -13,7 +13,6 @@ def img_path(path: str) -> str:
         raise argparse.ArgumentTypeError(f"{path} is not a valid image path") from exc
 
 
-
 def size(img_size: str) -> int:
     """Check if size is valid"""
     try:
@@ -24,8 +23,6 @@ def size(img_size: str) -> int:
         raise argparse.ArgumentTypeError("invalid image size (5-100)") from exc
 
 
-
-
 def threshold(img_threshold: str) -> int:
     """Check if threshold is valid"""
     try:
@@ -34,4 +31,3 @@ def threshold(img_threshold: str) -> int:
         raise argparse.ArgumentTypeError("invalid threshold (0-255)")
     except ValueError as exc:
         raise argparse.ArgumentTypeError("invalid threshold (0-255)") from exc
-
