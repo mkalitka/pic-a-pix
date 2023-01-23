@@ -21,6 +21,10 @@ MoveY = (m-2)*2
 NNY = n // 2 + n % 2 + 1
 NNX = m // 2 + m % 2 + 1
 
+LEFT = 1
+MIDDLE = 2
+RIGHT = 3
+
 if NNY > 6:
     HorizontalTable = X + MoveX - 25 - 10 // 2 * 20 + 20 * ((n + 1) % 2)
 else:
@@ -75,28 +79,36 @@ for i in range(0, n):
     for j in range(0, m):
         pygame.draw.rect(screen, (240, 230, 215), pygame.Rect(i * 20 + X + MoveX, j * 20 + Y+MoveY, scale, scale))
 
-Check = [[2]*m for i in range(n)]
+check = [[2]*m for i in range(n)]
 
 while True:
     mouse = pygame.mouse.get_pos()
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
+
             for i in range(0, n):
                 for j in range(0, m):
                     if i * 20 + X + MoveX <= mouse[0] <= i * 20 + X + MoveX + 18 and j * 20 + Y+MoveY <= mouse[1] <= j * 20 + Y+MoveY+18:
-                        Check[i][j] = Check[i][j]+1
-                        if Check[i][j] > 2:
-                            Check[i][j] = 0
-                        if Check[i][j] == 0:
+
+                        if event.button == LEFT and check[i][j] == 1:
+                            check[i][j] = 2
+                            pygame.draw.rect(screen, (240, 230, 215),
+                            pygame.Rect(i * 20 + X + MoveX, j * 20 + Y + MoveY, scale, scale))
+                            break
+                        elif event.button == RIGHT and check[i][j] == 0:
+                            check[i][j] = 2
+                            pygame.draw.rect(screen, (240, 230, 215),
+                            pygame.Rect(i * 20 + X + MoveX, j * 20 + Y + MoveY, scale, scale))
+                            break
+
+                        if event.button == RIGHT :
+                            check[i][j] = 0
                             pygame.draw.rect(screen, (240, 230, 215), pygame.Rect(i * 20 + X + MoveX, j * 20 + Y+MoveY, scale, scale))
                             screen.blit(text, (i * 20 + X + MoveX + 1, j * 20 + Y+MoveY - 2, scale, scale))
-                            break
-                        elif Check[i][j] == 1:
+                        if event.button == LEFT:
+                            check[i][j] = 1
                             pygame.draw.rect(screen, (33, 48, 88), pygame.Rect(i * 20 + X + MoveX, j * 20 + Y+MoveY, scale, scale))
-                            break
-                        elif Check[i][j] == 2:
-                            pygame.draw.rect(screen, (240, 230, 215), pygame.Rect(i * 20 + X + MoveX, j * 20 + Y+MoveY, scale, scale))
-                            break
+
 
             if X+MoveX-15 <= mouse[0] <= X+MoveX-10 and Y+MoveY-50 <= mouse[1] <= Y+MoveY-35:
                 print("X")
