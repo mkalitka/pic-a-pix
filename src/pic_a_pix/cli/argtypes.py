@@ -6,15 +6,11 @@ from PIL import Image
 
 def img_path(path: str) -> str:
     """Check if string is a valid path to an image"""
-    if os.path.isfile(path):
-        try:
-            with Image.open(path):
-                return path
-        except IOError as exc:
-            raise argparse.ArgumentTypeError(
-                f"{path} is not a valid image path"
-            ) from exc
-    raise argparse.ArgumentTypeError(f"{path} is not a valid image path")
+    try:
+        with Image.open(path):
+            return path
+    except IOError as exc:
+        raise argparse.ArgumentTypeError(f"{path} is not a valid image path") from exc
 
 
 def size(img_size: str) -> int:
