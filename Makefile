@@ -42,13 +42,15 @@ setup:
 	fi
 
 clean:
-	find . -type d -name "__pycache__" -delete
-	find . -type f -name "*.pyc" -delete
-	find . -type f -name "*~" -delete
-	rm -rf build/
-	rm -rf dist/
-	rm -rf .cache/
-	rm -rf *.egg-info
+	rm -fr build/
+	rm -fr dist/
+	rm -fr .eggs/
+	find . -name '*.egg-info' -exec rm -fr {} +
+	find . -name '*.egg' -exec rm -f {} +
+	find . -name '*.pyc' -exec rm -f {} +
+	find . -name '*.pyo' -exec rm -f {} +
+	find . -name '*~' -exec rm -f {} +
+	find . -name '__pycache__' -exec rm -fr {} +
 
 uninstall: clean
 	@pip3 uninstall pic_a_pix pillow pygame

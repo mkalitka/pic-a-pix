@@ -40,12 +40,12 @@ def create_argument_parser() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
-        "-s",
-        "--size",
+        "-l",
+        "--level",
         action="store",
-        type=argtypes.size,
-        default=20,
-        help="sets n x n pixels size of an image (5-100)",
+        type=argtypes.level,
+        default=0,
+        help="sets difficulty level (0-2)",
     )
 
     parser.add_argument(
@@ -65,9 +65,9 @@ def print_version() -> None:
     print(f"Current pic_a_pix version: {version.__version__}")
 
 
-def convert_image(img_name: str, img_size: int, threshold: int) -> None:
+def convert_image(img_name: str, lvl: int, threshold: int) -> None:
     """Converts and shows nonogram"""
-    converted = k4sia_image.convert_img(img_name, img_size, threshold)
+    converted = k4sia_image.convert_img(img_name, lvl, threshold)
     converted.show()
     print(k4sia_image.columns_and_rows(converted))
 
@@ -82,7 +82,7 @@ def main() -> None:
     elif cmdline_arguments.image is not None:
         convert_image(
             cmdline_arguments.image,
-            cmdline_arguments.size,
+            cmdline_arguments.level,
             cmdline_arguments.threshold,
         )
     else:
