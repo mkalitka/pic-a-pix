@@ -1,7 +1,5 @@
 from PIL import ImageColor
 from tkinter import filedialog
-from pic_a_pix import k4sia_image
-import pygame
 
 IMG_EXTS = r"*.png; *.jpg"
 
@@ -34,5 +32,5 @@ def file_open():
     return path
 
 #Test file_open function
-p = file_open()
-(k4sia_image.convert_img(p.name, 1, 90)).show()
+# p = file_open()
+# (k4sia_image.convert_img(p.name, 1, 90)).show()
