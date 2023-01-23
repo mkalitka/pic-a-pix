@@ -1,34 +1,32 @@
 # pic-a-pix 🖼️
 
-#### *A simple Python project that creates nonograms from pictures and automatically solves them.*
+#### *A simple Python project that creates nonograms from pictures.*
 
 The project was created by **UWR** students for **PWI** course.
 
-***TO-DO**: Insert screenshots here*
-
 ## Features
 
-- Image analysing
-- Automatic nonogram solving
+- Image analysis
+- Interactive nonogram solving
 - Cross platform (Windows 10/Linux/Mac OS)
 
 ## Roadmap
 
-- Convert an image to 1:1 aspect ratio 🟥
-- Divide an image to pixels sections 😀
-- Pick a color for a section ⚫⚪
-- Create a nonogram with an algorythm ☯️
-- Solve a nonogram with an algorythm 🖩
-- Draw and export nonogram 🖼️
+- Scale the picture to nonogram size 🟥
+- Binarize the image 😀
+- Generate a nonogram with an algorythm ☯️
+- Create a interactive nonogram board 🖩
+- Check if the nonogram is solved correctly 🖼️
 
 ## TO-DO
 
 - Generator K4SIA
-- Solving function
+- Checking function
 - GUI
 - MakeFile
 - Creator (optional)
-- Graphical representation of board (optional)
+- Different difficulties
+- Graphical representation of board
 
 ## Installation
 
