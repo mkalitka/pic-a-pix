@@ -3,6 +3,8 @@ from tkinter import filedialog
 from pic_a_pix import k4sia_image
 import pygame
 
+IMG_EXTS = r"*.png; *.jpg"
+
 # Changing color
 def hex_to_rgb(hex_color):
     rgb = ImageColor.getcolor(hex_color, "RGB")
@@ -26,9 +28,11 @@ def check_solution(correct_arr, to_check_arr):
 
 #Get file's path
 def file_open():
-    path = filedialog.askopenfile(title = "Select a File")
+    path = filedialog.askopenfile(title = "Select a File",
+                                  filetypes=(".png, .jpg", IMG_EXTS))
+
     return path
 
 #Test file_open function
 p = file_open()
-(convert_img(p.name, 40, 150)).show()
+(k4sia_image.convert_img(p.name, 40, 90)).show()
