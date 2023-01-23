@@ -20,7 +20,7 @@ def check_solution(correct_arr, to_check_arr):
     for i in range(n):
         m = len(correct_arr[i])
         for j in range(m):
-            if correct_arr[i][j] != to_check_arr[i][j]:
+            if correct_arr[i][j] != to_check_arr[i][j] and to_check_arr[i][j] != -1:
                 return 0
     return 1
 
