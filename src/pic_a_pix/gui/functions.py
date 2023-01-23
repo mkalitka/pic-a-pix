@@ -1,7 +1,9 @@
 from PIL import ImageColor
 from tkinter import filedialog
 
-IMG_EXTS = r"*.png; *.jpg"
+IMG_EXTS = r"*.png *.jpg *.jpeg *.jfif *.pjpeg *.pjp *.webp"
+IMG_JPEG = r"*.jpg *.jpeg *.jfif *.pjpeg *.pjp"
+
 
 # Changing color
 def hex_to_rgb(hex_color):
@@ -25,12 +27,14 @@ def check_solution(correct_arr, to_check_arr):
     return 1
 
 #Get file's path
-def file_open():
+def open_file():
     path = filedialog.askopenfile(title = "Select a File",
-                                  filetypes=(".png, .jpg", IMG_EXTS))
+                                  filetypes=[("All files", IMG_EXTS),
+                                             ("JPEG files", IMG_EXTS),
+                                             ("PNG files", "*.png")])
 
     return path
 
-#Test file_open function
-# p = file_open()
+#Test open_file function
+# p = open_file()
 # (k4sia_image.convert_img(p.name, 1, 90)).show()
