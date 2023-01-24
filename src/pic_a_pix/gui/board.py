@@ -4,6 +4,7 @@ from pygame import mixer
 
 def create_board(n, m, left_num, up_num):
     SCALE = 18
+    FPS = 60
 
     WIDTH = 1480
     HEIGHT = 820
@@ -17,14 +18,13 @@ def create_board(n, m, left_num, up_num):
     MoveX = (n-2)*2
     MoveY = (m-2)*2
 
-    LEFT = 1
-    RIGHT = 3
-
+    #Colors
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     GRAY = (54, 57, 63)
     GREEN = (81, 152, 114)
 
+    #Init gui colors #BLACK and WHITE are only examples
     FOREGROUND = BLACK
     BACKGROUND = WHITE
 
@@ -54,7 +54,7 @@ def create_board(n, m, left_num, up_num):
     pygame.draw.rect(screen, FOREGROUND, pygame.Rect(X+MoveX-5, VerticalTable, BWdh, 5))
 
     # Declare sounds
-    click_Sound = mixer.Sound('sounds/click.wav')
+    start_Sound = mixer.Sound('sounds/level_start.wav')
 
     for i in range(0, n+1):
         if i == 0:
@@ -92,47 +92,47 @@ def create_board(n, m, left_num, up_num):
         for j in range(0, m):
             pygame.draw.rect(screen, BACKGROUND, pygame.Rect(i * 20 + X + MoveX, j * 20 + Y+MoveY, SCALE, SCALE))
 
-    check = [[2]*m for i in range(n)]
+    check = [[-1]*m for i in range(n)]
+    clock = pygame.time.Clock()
+    start_Sound.play()
+    run = True
 
-    while True:
-        mouse = pygame.mouse.get_pos()
+    while run:
+        clock.tick(FPS)
         for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN:
-
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    run = False
+            if pygame.mouse.get_pressed()[0]:
+                mouse = pygame.mouse.get_pos()
                 for i in range(n):
                     for j in range(m):
                         if i * 20 + X + MoveX <= mouse[0] <= i * 20 + X + MoveX + 18 and j * 20 + Y + MoveY <= mouse[1] <= j * 20 + Y + MoveY + 18:
+                            check[i][j] = 1
+                            pygame.draw.rect(screen, FOREGROUND,  # Black button
+                                         pygame.Rect(i * 20 + X + MoveX, j * 20 + Y + MoveY, SCALE, SCALE))
 
-                            if event.button == LEFT:
-                                click_Sound.play()
+                        if event.type == pygame.QUIT:
+                            sys.exit(0)
 
-                            if event.button == LEFT and check[i][j] == 1:
-                                check[i][j] = 2
-                                pygame.draw.rect(screen, BACKGROUND,
-                                                 pygame.Rect(i * 20 + X + MoveX, j * 20 + Y + MoveY, SCALE, SCALE))
-                                break
-                            elif event.button == RIGHT and check[i][j] == 0:
-                                check[i][j] = 2
-                                pygame.draw.rect(screen, BACKGROUND,
-                                                 pygame.Rect(i * 20 + X + MoveX, j * 20 + Y + MoveY, SCALE, SCALE))
-                                break
+            if pygame.mouse.get_pressed()[2]:
+                mouse = pygame.mouse.get_pos()
+                for i in range(n):
+                    for j in range(m):
+                        if i * 20 + X + MoveX <= mouse[0] <= i * 20 + X + MoveX + 18 and j * 20 + Y + MoveY <= mouse[1] <= j * 20 + Y + MoveY + 18:
+                            check[i][j] = 0
+                            pygame.draw.rect(screen, BACKGROUND,
+                                             pygame.Rect(i * 20 + X + MoveX, j * 20 + Y + MoveY, SCALE, SCALE))
+                            screen.blit(block_x, (i * 20 + X + MoveX + 1, j * 20 + Y + MoveY - 2, SCALE, SCALE))
 
-                            if event.button == RIGHT:
-                                check[i][j] = 0
-                                pygame.draw.rect(screen, BACKGROUND,
-                                                 pygame.Rect(i * 20 + X + MoveX, j * 20 + Y + MoveY, SCALE, SCALE))
-                                screen.blit(block_x, (i * 20 + X + MoveX + 1, j * 20 + Y + MoveY - 2, SCALE, SCALE))
-
-                            if event.button == LEFT:
-                                check[i][j] = 1
-                                pygame.draw.rect(screen, FOREGROUND, #Black button
-                                                 pygame.Rect(i * 20 + X + MoveX, j * 20 + Y + MoveY, SCALE, SCALE))
-
-            if event.type == pygame.QUIT:
-                sys.exit(0)
+                        if event.type == pygame.QUIT:
+                            sys.exit(0)
         pygame.display.flip()
 
-left_num=[[1], [12], [1, 1, 1 ,1 ,1 , 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4], [1], [12], [1, 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4]]
-up_num=[[1], [12], [1, 1, 1 ,1 ,1 , 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4], [1], [12], [1, 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4]]
+    return check #return bitmap of nonogram
 
-create_board(30, 30, left_num, up_num)
+# left_num=[[1], [12], [1, 1, 1 ,1 ,1 , 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4], [1], [12], [1, 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4]]
+# up_num=[[1], [12], [1, 1, 1 ,1 ,1 , 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4], [1], [12], [1, 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4]]
+#
+# x = create_board(30, 30, left_num, up_num)
+# print(x)
