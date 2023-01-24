@@ -18,12 +18,16 @@ def check_if_clicked(mouse_pos, box_pos):
             return True
 # Checking if solution is correct
 def check_solution(correct_arr, to_check_arr):
+
     n = len(correct_arr)
     for i in range(n):
         m = len(correct_arr[i])
+        print(n, m)
+        print(len(to_check_arr) , len(to_check_arr[i]))
         for j in range(m):
-            if correct_arr[i][j] != to_check_arr[i][j] and to_check_arr[i][j] != -1:
+            if correct_arr[i][j] != to_check_arr[j][i] and to_check_arr[j][i] != -1:
                 return 0
+
     return 1
 
 #Get file's path
@@ -54,6 +58,8 @@ class BUTTON:
         self.shake_duration = 500  # 0.5 sekundy
         self.click_time = 0
         self.original_x = self.x
+        self.HIGH = HIGH
+        self.WIDE = WIDE
     def if_cliked(self):
         action = False
         pos = pygame.mouse.get_pos()
@@ -62,8 +68,8 @@ class BUTTON:
             self.cliked = True
             self.click_time = pygame.time.get_ticks()
         return action
-    def update(self,screen):
-        if self.cliked == True:
+    def update(self,screen,if_correct):
+        if self.cliked == True and if_correct == False:
             time_since_click = pygame.time.get_ticks() - self.click_time
             if time_since_click > self.shake_duration:
                 self.click_time = 0
@@ -72,4 +78,23 @@ class BUTTON:
             else:
                 self.rect.x += self.shake_speed
                 self.shake_speed = -self.shake_speed
+        elif if_correct == True and self.cliked == True:
+            win = True
+            # font = pygame.font.SysFont('A', 35)
+            # text= font.render('X', True, (0,0,0))
+            font = pygame.font.Font(None,36)
+            while win:
+                for event in pygame.event.get():
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_ESCAPE:
+                            run = False
+                            pygame.quit()
+                    if event.type == pygame.QUIT:
+                        run = False
+                        pygame.quit()
+                screen.fill((0,255,0))
+                # screen.blit(text,self.WIDE//2,self.HIGH // 2,1)
+                text = font.render("YOU WIN" , 1,(0,0,0))
+                screen.blit(text,(self.WIDE//2,self.HIGH//2,1,1))
+                pygame.display.flip()
         screen.blit(self.image, self.rect)
