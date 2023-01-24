@@ -1,7 +1,7 @@
 import sys
 import pygame
 from pygame import mixer
-
+from functions import BUTTON
 def create_board(n, m, left_num, up_num):
     SCALE = 18
     FPS = 60
@@ -96,13 +96,15 @@ def create_board(n, m, left_num, up_num):
     clock = pygame.time.Clock()
     start_Sound.play()
     run = True
-
+    button_cre = BUTTON("icons/check.png", 0.87, 0.2, 0.3, WIDTH, HEIGHT)
     while run:
         clock.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     run = False
+            if event.type == pygame.QUIT:
+                run = False
             if pygame.mouse.get_pressed()[0]:
                 mouse = pygame.mouse.get_pos()
                 for i in range(n):
@@ -114,7 +116,7 @@ def create_board(n, m, left_num, up_num):
 
                         if event.type == pygame.QUIT:
                             sys.exit(0)
-
+                button_cre.if_cliked()
             if pygame.mouse.get_pressed()[2]:
                 mouse = pygame.mouse.get_pos()
                 for i in range(n):
@@ -127,12 +129,13 @@ def create_board(n, m, left_num, up_num):
 
                         if event.type == pygame.QUIT:
                             sys.exit(0)
+        button_cre.update(screen)
         pygame.display.flip()
-
+    pygame.quit()
     return check #return bitmap of nonogram
 
-# left_num=[[1], [12], [1, 1, 1 ,1 ,1 , 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4], [1], [12], [1, 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4]]
-# up_num=[[1], [12], [1, 1, 1 ,1 ,1 , 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4], [1], [12], [1, 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4]]
-#
-# x = create_board(30, 30, left_num, up_num)
-# print(x)
+left_num=[[1], [12], [1, 1, 1 ,1 ,1 , 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4], [1], [12], [1, 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4]]
+up_num=[[1], [12], [1, 1, 1 ,1 ,1 , 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4], [1], [12], [1, 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4]]
+
+x = create_board(30, 30, left_num, up_num)
+print(x)
