@@ -2,6 +2,7 @@ import argparse
 from pic_a_pix.gui import board
 from pic_a_pix import version, k4sia_image
 from pic_a_pix.cli import argtypes
+from pic_a_pix.gui import board
 
 
 def create_argument_parser() -> argparse.ArgumentParser:
@@ -35,6 +36,7 @@ def create_argument_parser() -> argparse.ArgumentParser:
         "-i",
         "--image",
         action="store",
+        default=argparse.SUPPRESS,
         type=argtypes.img_path,
         help="path to an image to be converted",
     )
@@ -65,11 +67,12 @@ def print_version() -> None:
     print(f"Current pic_a_pix version: {version.__version__}")
 
 
-def convert_image(img_name: str, lvl: int, threshold: int) -> None:
-    """Converts and shows nonogram"""
-    converted = k4sia_image.convert_img(img_name, lvl, threshold)
-    converted.show()
-    print(k4sia_image.columns_and_rows(converted))
+def run_game(img_name: str, lvl: int, threshold: int) -> None:
+    """Runs game"""
+    img = k4sia_image.convert_img(img_name, lvl, threshold)
+    left_num, up_num = k4sia_image.columns_and_rows(img)
+    img.show()
+    board.create_board(left_num, up_num)
 
 def show_board(img_name: str, lvl: int, threshold: int):
     converted = k4sia_image.convert_img(img_name, lvl, threshold)
@@ -85,7 +88,7 @@ def main() -> None:
 
     if hasattr(cmdline_arguments, "version"):
         print_version()
-    elif cmdline_arguments.image is not None:
+    elif hasattr(cmdline_arguments, "image"):
         show_board(
             cmdline_arguments.image,
             cmdline_arguments.level,
