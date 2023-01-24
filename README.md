@@ -50,9 +50,12 @@ If you have encountered any problems with command above, try:
 python3 -m pic_a_pix --help
 ```
 
-## Running Tests
+## Gameplay
 
-***TO-DO**: Insert a tests guide here*
+- Left click - colors square black
+- Right click - marks square with an 'X'
+- Check - click to check whether your solutuion is right or wrong
+
 
 ## Contributing
 
