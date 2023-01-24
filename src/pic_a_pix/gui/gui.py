@@ -21,7 +21,7 @@ class BUTTON:
         self.y = y * HIGH - self.heigh/2
         self.rect = pygame.Rect(self.x, self.y,self.width,self.heigh)
     def draw_if(self):
-        if self.cliked == False:
+        if self.cliked == True:
             screen.blit(self.image, self.rect)
     def draw_menu(self):
         action = False
