@@ -12,7 +12,7 @@ def img_path(path: str) -> str:
         raise argparse.ArgumentTypeError(f"{path} is not a valid image path") from exc
 
 
-def size(lvl: str) -> int:
+def level(lvl: str) -> int:
     """Check if size is valid"""
     try:
         if 0 <= int(lvl) <= 2:
