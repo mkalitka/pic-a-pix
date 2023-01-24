@@ -28,12 +28,24 @@ The project was created by **UWR** students for **PWI** course.
 - Different difficulties
 - Graphical representation of board
 
+## Gameplay
+
+- Left click - colors square black
+- Right click - marks square with an 'X'
+- Check - click to check whether your solutuion is right or wrong
+
 ## Installation
 
 To install pic-a-pix, type:
 
 ```
 make install
+```
+
+If you are on Windows or the command above doesn't work for you, try:
+
+```
+pip3 install -e .
 ```
 
 ## Usage
@@ -49,13 +61,6 @@ If you have encountered any problems with command above, try:
 ```
 python3 -m pic_a_pix --help
 ```
-
-## Gameplay
-
-- Left click - colors square black
-- Right click - marks square with an 'X'
-- Check - click to check whether your solutuion is right or wrong
-
 
 ## Contributing
 
