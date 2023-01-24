@@ -1,5 +1,5 @@
 import argparse
-
+from pic_a_pix.gui import board
 from pic_a_pix import version, k4sia_image
 from pic_a_pix.cli import argtypes
 
@@ -71,6 +71,12 @@ def convert_image(img_name: str, lvl: int, threshold: int) -> None:
     converted.show()
     print(k4sia_image.columns_and_rows(converted))
 
+def show_board(img_name: str, lvl: int, threshold: int):
+    converted = k4sia_image.convert_img(img_name, lvl, threshold)
+    matrix = k4sia_image.create_matrix(converted)
+    left_num, up_num = k4sia_image.columns_and_rows(converted)
+    board.create_board(left_num,up_num,matrix)
+
 
 def main() -> None:
     """Run as Python application"""
@@ -80,7 +86,7 @@ def main() -> None:
     if hasattr(cmdline_arguments, "version"):
         print_version()
     elif cmdline_arguments.image is not None:
-        convert_image(
+        show_board(
             cmdline_arguments.image,
             cmdline_arguments.level,
             cmdline_arguments.threshold,

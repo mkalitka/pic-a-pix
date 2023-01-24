@@ -1,11 +1,12 @@
 import sys
 import pygame
 from pygame import mixer
-from functions import BUTTON
-def create_board(n, m, left_num, up_num):
+from pic_a_pix.gui import functions
+def create_board(left_num, up_num,matrix):
+    n = len(up_num)
+    m = len(left_num)
     SCALE = 18
     FPS = 60
-
     WIDTH = 1480
     HEIGHT = 820
 
@@ -54,8 +55,7 @@ def create_board(n, m, left_num, up_num):
     pygame.draw.rect(screen, FOREGROUND, pygame.Rect(X+MoveX-5, VerticalTable, BWdh, 5))
 
     # Declare sounds
-    start_Sound = mixer.Sound('sounds/level_start.wav')
-
+    # start_Sound = mixer.Sound('sounds/level_start.wav')
     for i in range(0, n+1):
         if i == 0:
             pygame.draw.rect(screen, FOREGROUND, pygame.Rect(X + MoveX - 5 + i * 20, VerticalTable, 5, BHgt))
@@ -94,9 +94,10 @@ def create_board(n, m, left_num, up_num):
 
     check = [[-1]*m for i in range(n)]
     clock = pygame.time.Clock()
-    start_Sound.play()
+    # start_Sound.play()
     run = True
-    button_cre = BUTTON("icons/check.png", 0.87, 0.2, 0.3, WIDTH, HEIGHT)
+    button_cre = functions.BUTTON("/home/mikol/project/pic-a-pix/src/pic_a_pix/gui/icons/check.png", 0.9, 0.1, 0.3, WIDTH, HEIGHT)
+    if_correct = False
     while run:
         clock.tick(FPS)
         for event in pygame.event.get():
@@ -116,7 +117,9 @@ def create_board(n, m, left_num, up_num):
 
                         if event.type == pygame.QUIT:
                             sys.exit(0)
-                button_cre.if_cliked()
+                action = button_cre.if_cliked()
+                if action == True:
+                    if_correct = functions.check_solution(matrix,check)
             if pygame.mouse.get_pressed()[2]:
                 mouse = pygame.mouse.get_pos()
                 for i in range(n):
@@ -126,16 +129,15 @@ def create_board(n, m, left_num, up_num):
                             pygame.draw.rect(screen, BACKGROUND,
                                              pygame.Rect(i * 20 + X + MoveX, j * 20 + Y + MoveY, SCALE, SCALE))
                             screen.blit(block_x, (i * 20 + X + MoveX + 1, j * 20 + Y + MoveY - 2, SCALE, SCALE))
-
                         if event.type == pygame.QUIT:
                             sys.exit(0)
-        button_cre.update(screen)
+        button_cre.update(screen,if_correct)
         pygame.display.flip()
     pygame.quit()
     return check #return bitmap of nonogram
 
-left_num=[[1], [12], [1, 1, 1 ,1 ,1 , 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4], [1], [12], [1, 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4]]
-up_num=[[1], [12], [1, 1, 1 ,1 ,1 , 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4], [1], [12], [1, 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4]]
-
-x = create_board(30, 30, left_num, up_num)
-print(x)
+# left_num=[[1], [12], [1, 1, 1 ,1 ,1 , 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4], [1], [12], [1, 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4]]
+# up_num=[[1], [12], [1, 1, 1 ,1 ,1 , 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4], [1], [12], [1, 1], [1, 1], [1], [2, 1], [1], [1, 1], [1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [3, 1], [1, 1], [1, 1], [2, 1], [4]]
+#
+# x = create_board(30, 30, left_num, up_num,matrix)
+# print(x)
