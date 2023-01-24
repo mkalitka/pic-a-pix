@@ -1,6 +1,7 @@
 from typing import List, Tuple
 from PIL import Image
 
+
 def convert_img(img_name: str, lvl: int, threshold: int) -> Image.Image:
     """Loading the image and converting it"""
     with Image.open(img_name) as img_a:
@@ -27,14 +28,6 @@ def create_matrix(img: Image.Image) -> List[List[int]]:
                 pixels[i][j] = 1
 
     return pixels
-
-def save_matrix_to_file(pixels, file):
-    matrix = open(file, 'w')
-    for line in pixels:
-        for i in line:
-            matrix.write(str(i))
-        matrix.write('\n')
-    matrix.close()
 
 
 def columns_and_rows(img: Image.Image) -> Tuple[List[List[int]], List[List[int]]]:
@@ -72,22 +65,23 @@ def columns_and_rows(img: Image.Image) -> Tuple[List[List[int]], List[List[int]]
     r_and_c = (rows, cols)
     return r_and_c
 
+
 def w_h(width: int, height: int, lvl: int) -> Tuple[int, int]:
     """Scaling the picture"""
     print("Dimensions:", width, height)
-    if lvl == 0:   # easy
+    if lvl == 0:  # easy
         size_w = 10
         size_h = 20
-    if lvl == 1:   # medium
+    if lvl == 1:  # medium
         size_w = 15
         size_h = 30
-    if lvl == 2:   # hard
+    if lvl == 2:  # hard
         size_w = 20
         size_h = 40
 
     if width < height:
         n_1 = size_h
-        m_1 = int((n_1 * width) / height )
+        m_1 = int((n_1 * width) / height)
         m_1 = 5 * round(m_1 / 5)
     else:
         m_1 = size_w
@@ -98,14 +92,3 @@ def w_h(width: int, height: int, lvl: int) -> Tuple[int, int]:
     print("Board Dimensions", m_1, n_1)
 
     return m_1, n_1
-
-
-######## funkcje ktore maja byc w glownym miejscu i co beda robic
-# im = 'wiel.png' #jakas funkcja cowczytuje zdjecie
-# lvl=0
-# img = convert_img(im, lvl, 160)  #img to zdjecie male szare kwadraty .jpg
-# matrix = create_matrix(img)  # robi tablice dwuwymiarowa z 0 1 pozniej bedzie uzyta w funkcji check_if_correcti cr1sie
-# # save_matrix_to_file(matrix, 'matrix.txt')  #to na zapisuje tablice 0 1 do pliku matrix.txt (na razie nie potrzebne)
-# left_num, up_num = columns_and_rows(img) #dwie tablice dwuwymiarowe z liczbami ktore maja byc po lewej i na gorze planszy (podawane do create_board w cr1is/gui)
-# print(left_num)
-# print(up_num)

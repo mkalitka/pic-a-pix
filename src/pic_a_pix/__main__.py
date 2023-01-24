@@ -1,8 +1,8 @@
 import argparse
+
 from pic_a_pix.gui import board
 from pic_a_pix import version, k4sia_image
 from pic_a_pix.cli import argtypes
-from pic_a_pix.gui import board
 
 
 def create_argument_parser() -> argparse.ArgumentParser:
@@ -67,18 +67,12 @@ def print_version() -> None:
     print(f"Current pic_a_pix version: {version.__version__}")
 
 
-def run_game(img_name: str, lvl: int, threshold: int) -> None:
-    """Runs game"""
-    img = k4sia_image.convert_img(img_name, lvl, threshold)
-    left_num, up_num = k4sia_image.columns_and_rows(img)
-    img.show()
-    board.create_board(left_num, up_num)
-
 def show_board(img_name: str, lvl: int, threshold: int):
+    """Runs game"""
     converted = k4sia_image.convert_img(img_name, lvl, threshold)
     matrix = k4sia_image.create_matrix(converted)
     left_num, up_num = k4sia_image.columns_and_rows(converted)
-    board.create_board(left_num,up_num,matrix)
+    board.create_board(left_num, up_num, matrix)
 
 
 def main() -> None:

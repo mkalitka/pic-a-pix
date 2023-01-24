@@ -1,6 +1,6 @@
 [project]
 name = "pic_a_pix"
-version = "0.2"
+version = "1.0"
 description = "A simple Python project that creates nonograms from pictures and automatically solves them."
 readme = "README.md"
 requires-python = ">=3.8"
