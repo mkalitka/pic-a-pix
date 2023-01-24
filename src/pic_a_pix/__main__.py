@@ -35,6 +35,7 @@ def create_argument_parser() -> argparse.ArgumentParser:
         "-i",
         "--image",
         action="store",
+        default=argparse.SUPPRESS,
         type=argtypes.img_path,
         help="path to an image to be converted",
     )
@@ -79,7 +80,7 @@ def main() -> None:
 
     if hasattr(cmdline_arguments, "version"):
         print_version()
-    elif cmdline_arguments.image is not None:
+    elif hasattr(cmdline_arguments, "image"):
         convert_image(
             cmdline_arguments.image,
             cmdline_arguments.level,
