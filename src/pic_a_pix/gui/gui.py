@@ -21,7 +21,7 @@ class BUTTON:
         self.y = y * HIGH - self.heigh/2
         self.rect = pygame.Rect(self.x, self.y,self.width,self.heigh)
     def draw_if(self):
-        if self.cliked == False:
+        if self.cliked == True:
             screen.blit(self.image, self.rect)
     def draw_menu(self):
         action = False
@@ -30,6 +30,7 @@ class BUTTON:
             action = True
             self.cliked = True
         return action
+
 def main():
     global display_color
     run = True
@@ -52,7 +53,8 @@ def main():
                 if button_cre.cliked == True:
                     button_img.cliked = True
                 if action_img == True:
-                    pass
+                    path = functions.open_file()
+                    # print(path)
                 if action_cre == True:
                     pass
         button_cre.draw_if()
